@@ -17,7 +17,7 @@ func NewDemo() service.IDemo {
   //service.Gateway().UserHook().InstallHook(1, result.Auth)
   //service.Gateway().UserHook().InstallHook(2, result.UnAuth)
 
-  service.Radio().GetCommonHook().InstallHook(1, result.Auth)
+  service.Radio().GetDefaultHook().InstallHook(1, result.Auth)
 
   service.Radio().GetOtherHook().InstallHook(1, func(ctx context.Context, info *base_hook.User) error {
     fmt.Println("Auth-OtherHook")

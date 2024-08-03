@@ -13,7 +13,7 @@ type cUser struct{}
 
 func (c *cUser) Auth(ctx context.Context, req *user_v1.AuthReq) (user_v1.AuthRes, error) {
   //err := service.Radio().Publish(ctx, base_hook.Option{Data: req.Username})
-  err := service.Radio().Publish(ctx, base_hook.Option{Data: &base_hook.User{Username: req.Username}})
+  err := service.Radio().Publish(ctx, base_hook.Option{Data: &base_hook.User{Username: req.Username}, NetMessage: true})
   //base_hook.PublishHookMessage(context.Background(), &s.OtherHook, option)
 
   return err == nil, err

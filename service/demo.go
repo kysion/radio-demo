@@ -13,7 +13,7 @@ import (
 
 type (
 	IRadio interface {
-		GetCommonHook() *base_hook.BaseHook[int, base_hook.CommonHookFunc]
+		GetDefaultHook() *base_hook.BaseHook[int, base_hook.DefaultHookFunc]
 		GetOtherHook() *base_hook.BaseHook[int, base_hook.UserHookFunc]
 		MakePublish()
 		// Publish 发布广播
