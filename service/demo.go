@@ -15,7 +15,6 @@ type (
 	IRadio interface {
 		GetDefaultHook() *base_hook.BaseHook[int, base_hook.DefaultHookFunc]
 		GetOtherHook() *base_hook.BaseHook[int, base_hook.UserHookFunc]
-		MakePublish()
 		// Publish 发布广播
 		Publish(ctx context.Context, option base_hook.Option, isRemoteMessage ...bool) error
 	}

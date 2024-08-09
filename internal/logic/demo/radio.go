@@ -16,42 +16,16 @@ type sRadio struct {
 }
 
 func NewRadio() service.IRadio {
-  return (&sRadio{}).registerHookMessage()
+  result := &sRadio{}
+  // 注册网关Hook消息,用于接收通过网络发送来的HOOK消息
+  base_hook.RegisterHookMessage(&result.DefaultHook)
+  base_hook.RegisterHookMessage(&result.OtherHook)
+
+  return result
 }
 
 func init() {
   service.RegisterRadio(NewRadio())
-  service.Radio().MakePublish()
-}
-
-func (s *sRadio) registerHookMessage() service.IRadio {
-
-  // 注册网关Hook消息,用于接收通过网络发送来的HOOK消息
-  base_hook.RegisterHookMessage(&s.DefaultHook)
-  base_hook.RegisterHookMessage(&s.OtherHook)
-
-  // 注册网关Hook消息
-  //base_hook.RegisterHookMessage(base_enum.Hook.BusinessType.Default, &s.DefaultHook)
-  //base_hook.RegisterHookMessage(base_enum.Hook.BusinessType.Default, &s.OtherHook)
-
-  //base_hook.Gateway().RegisterHookMessage(func(model base_model.HookModel) {
-  //  if model.BusinessType() == base_enum.Hook.BusinessType.Default {
-  //    // model.Data 可以获取到消息内容,按实际使用场景按需转换数据类型
-  //    // 广播消息
-  //    base_hook.PublishHookMessage(context.Background(), &s.DefaultHook, base_hook.Option{Data: model.Data})
-  //
-  //    // 广播消息
-  //    base_hook.PublishHookMessage(context.Background(), &s.OtherHook, base_hook.Option{Data: model.Data})
-  //
-  //    //OtherHook.Iterator(func(key int, value base_hook.DefaultHookFunc) {
-  //    //  err := value(context.Background(), model.Data)
-  //    //  if err != nil {
-  //    //    fmt.Println(err)
-  //    //  }
-  //    //})
-  //  }
-  //})
-  return s
 }
 
 func (s *sRadio) GetDefaultHook() *base_hook.BaseHook[int, base_hook.DefaultHookFunc] {
@@ -60,15 +34,6 @@ func (s *sRadio) GetDefaultHook() *base_hook.BaseHook[int, base_hook.DefaultHook
 
 func (s *sRadio) GetOtherHook() *base_hook.BaseHook[int, base_hook.UserHookFunc] {
   return &s.OtherHook
-}
-
-func (s *sRadio) MakePublish() {
-  //s.Publish(context.Background(), "abcd")
-  //base_hook.PublishHookMessage(context.Background(), &s.DefaultHook, base_hook.Option{Data: "abcd"})
-}
-
-func bc[T any]() error {
-  return nil
 }
 
 // Publish 发布广播

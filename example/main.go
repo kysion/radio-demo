@@ -36,8 +36,6 @@ package main
 //}
 
 import (
-  "fmt"
-  "github.com/gogf/gf/v2/encoding/gbinary"
   "github.com/gogf/gf/v2/os/gctx"
   "github.com/kysion/radio-demo/internal/cmd"
   _ "github.com/kysion/radio-demo/internal/logic"
@@ -55,12 +53,12 @@ func main() {
   //  Field1: 133,
   //  Field2: "sss",
   //}
-  data := gbinary.BeEncodeString("abcccccc")
-  myStruct := MyStruct{}
-  toString := gbinary.DecodeToString(data)
-  fmt.Println(toString)
-  // 输出转换后的结构体
-  fmt.Println(myStruct)
+  //data := gbinary.BeEncodeString("abcccccc")
+  //myStruct := MyStruct{}
+  //toString := gbinary.DecodeToString(data)
+  //fmt.Println(toString)
+  //// 输出转换后的结构体
+  //fmt.Println(myStruct)
 
   cmd.Main.Run(gctx.GetInitCtx())
 
